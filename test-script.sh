@@ -1,3 +1,4 @@
+echo $1
 echo "Sleep 5"
 sleep 5
 echo "curl 3 times"
