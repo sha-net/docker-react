@@ -9,5 +9,5 @@ script:
  - docker run --name docker-react -p 8081:8081 -d shavitnetzer/docker-react 
  - docker ps
  - netstat -nptul
- - curl -q localhost:8081
+ - curl -q -vv http://localhost:8081/
  - docker rm -f docker-react
