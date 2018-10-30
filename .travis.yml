@@ -10,5 +10,5 @@ script:
  - docker-compose  ps
  - netstat -nptul
  - cat index.js
- - curl -q -vv localhost:8081
+ - curl -q -vv localhost:8083
  - docker-compose down
