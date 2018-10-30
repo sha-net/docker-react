@@ -7,7 +7,9 @@ before_install:
 
 script:
  - docker-compose up --build -d
+ - sleep 5
  - curl -q localhost:8083
  - curl -q localhost:8083
- - if [ `curl -q localhost:8083` = "Number of visits is 2" ];then exit 0 ; else exit 1;fi
+ - a=`curl -q localhost:8083`
+ - if [ "$a" = "Number of visits is 2" ];then exit 0 ; else exit 1;fi
  - docker-compose down
