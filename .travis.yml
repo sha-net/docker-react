@@ -7,8 +7,7 @@ before_install:
 
 script:
  - docker-compose up --build -d
- - docker-compose  ps
- - netstat -nptul
- - cat index.js
- - curl -q -vv localhost:8083
+ - curl -q localhost:8083
+ - curl -q localhost:8083
+ - if [ `curl -q localhost:8083` = "Number of visits is 2" ];then exit 0 ; else exit 1;fi
  - docker-compose down
