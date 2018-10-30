@@ -6,4 +6,5 @@ before_install:
  - docker build -t shavitnetzer/docker-react .
 
 script:
- - docker run shavitnetzer/docker-react ls 
+ - curl -q localhost:8081
+# - docker run shavitnetzer/docker-react ls 
