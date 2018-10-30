@@ -1,4 +1,9 @@
 echo $1
+if [ "$1" = "1234567890" ];then
+ echo "yep it is the password"
+else
+ echo "fuck"
+fi
 echo "Sleep 5"
 sleep 5
 echo "curl 3 times"

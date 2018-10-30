@@ -7,5 +7,5 @@ before_install:
 
 script:
  - docker-compose up --build -d
- - bash test-script.sh $SHAV
+ - bash test-script.sh $PASS
  - docker-compose down
