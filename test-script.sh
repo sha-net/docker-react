@@ -4,7 +4,7 @@ echo "curl 3 times"
 curl -q localhost:8083
 curl -q localhost:8083
 a=`curl -q localhost:8083`
-if [ "$a" = "Number of visits is 3" ];
+if [ "$a" = "Number of visits is 2" ];
  then
   echo "The script test ended OK"
    exit 0
