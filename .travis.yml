@@ -11,5 +11,5 @@ script:
  - curl -q localhost:8083
  - curl -q localhost:8083
  - a=`curl -q localhost:8083`
- - if [ "$a" = "Number of visits is 2" ];then exit 0 ; else exit 1;fi
+ - if [ "$a" = "Number of visits is 3" ];then exit 0 ; else exit 1;fi
  - docker-compose down
