@@ -11,8 +11,9 @@ script:
   - docker-compose down
 
 after_success:
-  - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
-  - docker push ${DOCKER_USERNAME}/docker-react:${TRAVIS_BUILD_NUMBER}
+  - bash docker-push.sh
+#  - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+#  - docker push ${DOCKER_USERNAME}/docker-react:${TRAVIS_BUILD_NUMBER}
 #  provider: script
 #  script: 
 #   - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
