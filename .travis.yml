@@ -1,23 +1,35 @@
-language: python
-  python:
-    - "3.6"
 sudo: required
 services:
   - docker
 
-#before_install:
-#  - docker build -t $DOCKER_USERNAME/docker-react:$TRAVIS_BUILD_NUMBER .
+before_install:
+  - docker build -t shavitnetzer/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker-compose up --build -d
-  - bash test-script.sh $PASS
-  - docker-compose down
+  - docker run shavitnetzer/react-test npm test -- --coverage
 
-deploy:
-  provider: script
-  script: 
-   - docker build -t $DOCKER_USERNAME/docker-react:$TRAVIS_BUILD_NUMBER .
-   - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-   - docker push $DOCKER_USERNAME/docker-react:$TRAVIS_BUILD_NUMBER
-  on:
-    branch: master
+after_success:
+  - docker build -t shavitnetzer/multi-client ./client
+  - docker build -t shavitnetzer/multi-nginx ./nginx
+  - docker build -t shavitnetzer/multi-server ./server
+  - docker build -t shavitnetzer/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push shavitnetzer/multi-client
+  - docker push shavitnetzer/multi-nginx
+  - docker push shavitnetzer/multi-server
+  - docker push shavitnetzer/multi-worker
+
+#deploy:
+#  provider: elasticbeanstalk
+#  region: us-west-1
+#  app: multi-docker
+#  env: MultiDocker-env
+#  bucket_name: elasticbeanstalk-us-west-1-306476627547
+#  bucket_path: docker-multi
+#  on:
+#    branch: master
+#  access_key_id: $AWS_ACCESS_KEY
+#  secret_access_key:
+#    secure: $AWS_SECRET_KEY
