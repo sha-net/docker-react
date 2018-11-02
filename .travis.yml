@@ -1,18 +1,18 @@
 sudo: required
 services:
- docker
+  - docker
 
 before_install:
- docker build -t shavitnetzer/docker-react .
+  - docker build -t shavitnetzer/docker-react .
 
 script:
- docker-compose up --build -d
- bash test-script.sh $PASS
- docker-compose down
+  - docker-compose up --build -d
+  - bash test-script.sh $PASS
+  - docker-compose down
 
 after_success:
- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
- docker push $DOCKER_USERNAME/docker-react:$TRAVIS_BUILD_NUMBER
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push $DOCKER_USERNAME/docker-react:$TRAVIS_BUILD_NUMBER
 #  provider: script
 #  script: 
 #   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
