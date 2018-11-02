@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t shavitnetzer/docker-react .
+  - docker build -t $DOCKER_USERNAME/docker-react:$TRAVIS_BUILD_NUMBER .
 
 script:
   - docker-compose up --build -d
@@ -22,9 +22,9 @@ script:
 deploy:
   provider: script
   script: 
-   - bash docker-push.sh
-#   - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-#   - docker push $DOCKER_USERNAME/docker-react:$TRAVIS_BUILD_NUMBER
+#   - bash docker-push.sh
+   - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+   - docker push $DOCKER_USERNAME/docker-react:$TRAVIS_BUILD_NUMBER
 #   - docker push shavitnetzer/docker-react:001
   on:
     branch: master
