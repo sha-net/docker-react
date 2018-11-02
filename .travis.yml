@@ -10,17 +10,18 @@ script:
   - bash test-script.sh $PASS
   - docker-compose down
 
-after_success:
-   script:
-    - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-    - docker push shavitnetzer/docker-react:001
+#after_success:
+#   script:
+#    - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+#    - docker push shavitnetzer/docker-react:001
 #after_success:
 #  - bash docker-push.sh $DOCKER_USERNAME $DOCKER_PASSWORD $TRAVIS_BUILD_NUMBER
 #  - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
 #  - docker push ${DOCKER_USERNAME}/docker-react:${TRAVIS_BUILD_NUMBER}
-#  provider: script
-#  script: 
-#   - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
-#   - docker push shavitnetzer/docker-react:001
-#  on:
-#    branch: master
+deploy:
+  provider: script
+  script: 
+   - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+   - docker push shavitnetzer/docker-react:001
+  on:
+    branch: master
