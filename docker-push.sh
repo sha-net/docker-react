@@ -9,4 +9,4 @@ echo login
 echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
 #docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 echo push
-docker push $DOCKER_USERNAME/docker-react:001
+docker push $DOCKER_USERNAME/docker-react
