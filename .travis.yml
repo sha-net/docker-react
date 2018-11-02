@@ -11,8 +11,9 @@ script:
   - docker-compose down
 
 after_success:
-  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-  - docker push shavitnetzer/docker-react:001
+   script:
+    - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+    - docker push shavitnetzer/docker-react:001
 #after_success:
 #  - bash docker-push.sh $DOCKER_USERNAME $DOCKER_PASSWORD $TRAVIS_BUILD_NUMBER
 #  - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
